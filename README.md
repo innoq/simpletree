@@ -1,14 +1,14 @@
 SimpleTree
 https://github.com/innoq/simpletree
 
-a simple jQuery plugin for collapsing nested trees, with support for checkbox
+a simple jQuery plugin for collapsing nested lists, with support for checkbox
 auto-selection
 
 adhering to the principles of progressive enhancement, the tree is initialized
 upon existing HTML/DOM structures
 
-demo: http://innoq.github.io/simpletree/
-test suite: http://innoq.github.io/simpletree/test/
+* demo: http://innoq.github.io/simpletree/
+* test suite: http://innoq.github.io/simpletree/test/
 
 
 Example
