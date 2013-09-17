@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>SimpleTree Test Suite</title>
+	<link rel="stylesheet" href="extlib/qunit.css">
+</head>
+
+<body>
+	<div id="qunit"></div>
+	<div id="qunit-fixture">
+		<ul class="hierarchy">
+			<li>hello</li>
+			<li>
+				world
+				<ul>
+					<li>foo</li>
+					<li>
+						bar
+						<ul>
+							<li>lorem</li>
+							<li>ipsum</li>
+						</ul>
+					</li>
+					<li>baz</li>
+				</ul>
+			</li>
+		</ul>
+
+		<ul class="selection">
+			<li><label><input type="checkbox"> hello</label></li>
+			<li>
+				<label><input type="checkbox"> world</label>
+				<ul>
+					<li><label><input type="checkbox"> foo</label></li>
+					<li>
+						<label><input type="checkbox"> bar</label>
+						<ul>
+							<li><label><input type="checkbox"> lorem</label></li>
+							<li><label><input type="checkbox"> ipsum</label></li>
+						</ul>
+					</li>
+					<li><label><input type="checkbox"> baz</label></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+
+	<script src="../extlib/jquery.js"></script>
+	<script src="../simpletree.js" data-cover></script>
+
+	<script src="extlib/qunit.js"></script>
+	<script src="extlib/blanket.js"></script>
+
+	<script src="test_simpletree.js"></script>
+</body>
+
+</html>
