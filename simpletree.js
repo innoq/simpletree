@@ -5,11 +5,13 @@
 
 "use strict";
 
-function CollapsibleTree(list) {
+function CollapsibleTree(list, options) {
 	list = list.jquery ? list : $(list);
 	list.addClass("tree").
-		on("click", "span.toggle", this.onToggle).
-		on("change", "input:checkbox",  this.onChange);
+		on("click", "span.toggle", this.onToggle);
+	if(!options || !options.nocheck) {
+		list.on("change", "input:checkbox",  this.onChange);
+	}
 	$("li:has(ul)", list).prepend('<span class="button toggle">▾</a>');
 }
 CollapsibleTree.prototype.onToggle = function(ev) {
@@ -26,9 +28,9 @@ CollapsibleTree.prototype.onChange = function(ev) {
 	checkbox.closest("li").find("input:checkbox").prop("checked", active);
 };
 
-$.fn.simpletree = function() {
+$.fn.simpletree = function(options) {
 	this.each(function(i, node) {
-		new CollapsibleTree(node);
+		new CollapsibleTree(node, options);
 	});
 	return this;
 };
