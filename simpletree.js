@@ -20,10 +20,12 @@ function CollapsibleTree(list, options) {
 
 	$("li:has(ul)", list).prepend('<span class="button toggle">▾</span>');
 	if(options.collapsed) {
-		$(".toggle", list).each(function(i, node) {
+		var toggle = function(i, node) {
 			var btn = $(node);
 			self.toggle(btn, ["show", "hide"]);
-		});
+		};
+		$(".toggle", list).each(toggle);
+		$("input:checked").parents("li").children(".toggle").each(toggle);
 	}
 
 }
