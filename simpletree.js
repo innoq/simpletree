@@ -22,12 +22,13 @@ function CollapsibleTree(list, options) {
 	if(options.collapsed) {
 		var toggle = function(i, node) {
 			var btn = $(node);
-			self.toggle(btn, ["show", "hide"]);
+			self.toggle(btn, false);
 		};
 		$(".toggle", list).each(toggle);
 		$("input:checked").parents("li").children(".toggle").each(toggle);
 	}
 
+	list.data("simpletree", this);
 }
 CollapsibleTree.prototype.onToggle = function(ev) {
 	var btn = $(this.context);
@@ -39,14 +40,28 @@ CollapsibleTree.prototype.onChange = function(ev) {
 	var active = checkbox.prop("checked");
 	checkbox.closest("li").find("input:checkbox").prop("checked", active);
 };
-CollapsibleTree.prototype.toggle = function(btn, actions) {
-	actions = actions || ["slideDown", "slideUp"];
-	var collapsed = btn.text() === "▸";
+// `btn` is a jQuery object referencing either a toggle button or the respective
+// list item
+// `animated` (optional) can be used to suppress animations
+// `collapse` (optional) can be used to force a specific state
+CollapsibleTree.prototype.toggle = function(btn, animated, collapse) {
+	var item;
+	if(btn.is("li")) {
+		item = btn;
+		btn = btn.children(".toggle");
+	} else {
+		item = btn.closest("li");
+	}
+	animated = animated === false ? false : true;
+	var collapsed = collapse !== undefined ? !collapse : btn.text() === "▸";
+
+	var actions = animated ? ["slideDown", "slideUp"] : ["show", "hide"];
 	var action = collapsed ? actions[0] : actions[1];
-	btn.closest("li").children("ul")[action]();
+	item.children("ul")[action]();
 	btn.text(collapsed ? "▾" : "▸");
 };
 
+// jQuery API wrapper
 $.fn.simpletree = function(options) {
 	this.each(function(i, node) {
 		new CollapsibleTree(node, options);
